@@ -2,30 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class QuizController extends Controller
 {
-    // Display the quiz questions form
-    public function showQuiz()
+    public function index()
     {
         return view('quiz.index');
     }
 
-    // Process quiz answers and recommend products
-    public function calculateRecommendation(Request $request)
+    public function recommend(Request $request)
     {
-        $vibe = $request->input('vibe'); // e.g., 'fresh', 'floral', 'woody'
+        $gender = $request->input('gender', 'Unisex');
 
-        // Match recommendations based on product description keywords
-        $recommendations = Product::where('description', 'like', '%' . $vibe . '%')->get();
-
-        // Fallback if no direct match is found
-        if($recommendations->isEmpty()) {
-            $recommendations = Product::take(2)->get();
+        // Find a matching product based on preference, or fall back to any product
+        $product = Product::where('gender_category', $gender)->inRandomOrder()->first();
+        
+        if (!$product) {
+            $product = Product::inRandomOrder()->first();
         }
 
-        return view('quiz.result', compact('recommendations', 'vibe'));
+        return view('quiz.result', compact('product'));
     }
 }

@@ -3,31 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naeze Perfumes - Scent Finder Quiz</title>
+    <title>Scent Quiz - Naeze Perfumes</title>
 </head>
 <body style="font-family: Arial, sans-serif; padding: 40px; text-align: center; background-color: #f9f9f9;">
+    <h1>Find Your Signature Scent</h1>
+    <p>Answer a quick question to discover your perfect Naeze Perfume match.</p>
 
-    <div style="max-width: 600px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-        <h1>Find Your Signature Scent</h1>
-        <p style="color: #666; margin-bottom: 30px;">Answer a quick question to discover the perfume that matches your lifestyle.</p>
+    <form action="{{ route('quiz.recommend') }}" method="POST" style="max-width: 400px; margin: 30px auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); text-align: left;">
+        @csrf
+        <label style="font-weight: bold; display: block; margin-bottom: 10px;">Select your preferred scent category:</label>
+        
+        <div style="margin-bottom: 15px;">
+            <input type="radio" name="gender" value="Men" required> Men's Collection (Bold, Woody, Fresh)<br>
+            <input type="radio" name="gender" value="Women"> Women's Collection (Floral, Soft, Crimson)<br>
+            <input type="radio" name="gender" value="Unisex"> Unisex Collection (Enigmatic, Warm, Luminous)
+        </div>
 
-        <form action="{{ route('quiz.submit') }}" method="POST" style="text-align: left;">
-            @csrf
-            <h3 style="color: #333; margin-bottom: 15px;">What is your preferred daily vibe or mood?</h3>
-            
-            <div style="margin-bottom: 12px;">
-                <label style="cursor: pointer;"><input type="radio" name="vibe" value="fresh" required> Fresh & Energetic (Sporty, zesty, clean)</label>
-            </div>
-            <div style="margin-bottom: 12px;">
-                <label style="cursor: pointer;"><input type="radio" name="vibe" value="floral" required> Elegant & Floral (Luxurious, romantic, evening wear)</label>
-            </div>
-            <div style="margin-bottom: 20px;">
-                <label style="cursor: pointer;"><input type="radio" name="vibe" value="woody" required> Warm & Woody (Rich, deep, subtle spices)</label>
-            </div>
-
-            <button type="submit" style="background: #b22222; color: white; border: none; padding: 12px 20px; border-radius: 4px; font-size: 16px; cursor: pointer; width: 100%;">Get Recommendations</button>
-        </form>
-    </div>
-
+        <button type="submit" style="width: 100%; background: #111; color: #fff; padding: 12px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer;">Discover My Scent</button>
+    </form>
+    
+    <p><a href="/" style="color: #666; text-decoration: none;">&larr; Back to Storefront</a></p>
 </body>
 </html>
