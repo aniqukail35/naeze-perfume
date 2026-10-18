@@ -20,41 +20,42 @@ class CartController extends Controller
     }
 
     public function add(Request $request, $id)
-    {
-        $product = Product::findOrFail($id);
-        $cart = session()->get('cart', []);
+{
+    $product = Product::findOrFail($id);
+    $cart = session()->get('cart', []);
 
-        // If item already exists in cart, increment quantity
-        if(isset($cart[$id])) {
-            $cart[$id]['quantity']++;
-        } else {
-            $cart[$id] = [
-                "name" => $product->name,
-                "price" => $product->price,
-                "quantity" => 1,
-                "gender_category" => $product->gender_category
-            ];
-        }
-
-        session()->put('cart', $cart);
-        session()->save(); // Ensures session data writes immediately
-
-        return redirect()->back();
+    if(isset($cart[$id])) {
+        $cart[$id]['quantity']++;
+    } else {
+        $cart[$id] = [
+            "name" => $product->name,
+            "price" => $product->price,
+            "quantity" => 1,
+            "gender_category" => $product->gender_category
+        ];
     }
 
-    public function remove($id)
-    {
-        $cart = session()->get('cart');
+    session()->put('cart', $cart);
+    session()->save();
 
-        if(isset($cart[$id])) {
-            unset($cart[$id]);
-            session()->put('cart', $cart);
-            session()->save();
-        }
+    return redirect()->back()->with('success', 'Successfully added ' . $product->name . ' to your cart!');
+}
+
+   public function remove($id)
+{
+    $cart = session()->get('cart');
+
+    if(isset($cart[$id])) {
+        $itemName = $cart[$id]['name'];
+        unset($cart[$id]);
+        session()->put('cart', $cart);
+        session()->save();
 
         return redirect()->route('cart.index');
     }
 
+    return redirect()->route('cart.index');
+}
     public function checkout()
     {
         // Require user login before placing an order
@@ -66,4 +67,27 @@ class CartController extends Controller
         session()->forget('cart');
         return view('cart.success');
     }
+    public function update(Request $request, $id)
+{
+    $cart = session()->get('cart', []);
+
+    if(isset($cart[$id])) {
+        $action = $request->input('action');
+
+        if($action === 'increase') {
+            $cart[$id]['quantity']++;
+        } elseif($action === 'decrease') {
+            $cart[$id]['quantity']--;
+            // If quantity drops to 0 or below, remove the item entirely
+            if($cart[$id]['quantity'] <= 0) {
+                unset($cart[$id]);
+            }
+        }
+
+        session()->put('cart', $cart);
+        session()->save();
+    }
+
+    return redirect()->route('cart.index');
+}
 }
