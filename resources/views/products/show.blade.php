@@ -8,7 +8,6 @@
 <body style="font-family: Arial, sans-serif; padding: 40px; background-color: #f9f9f9; color: #333;">
     
     @include('partials.navbar')
-<!-- Success Notification Banner -->
     
     <div style="max-width: 600px; margin: 30px auto; background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
         <span style="background: #111; color: #fff; padding: 4px 10px; font-size: 12px; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px;">{{ $product->gender_category }} Collection</span>
