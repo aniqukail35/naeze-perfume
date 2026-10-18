@@ -6,5 +6,6 @@
         <a href="/" style="color: #ccc; text-decoration: none; font-size: 14px; font-weight: bold;">Storefront</a>
         <a href="/quiz" style="color: #ccc; text-decoration: none; font-size: 14px; font-weight: bold;">Scent Quiz</a>
         <a href="/layering-lab" style="color: #ccc; text-decoration: none; font-size: 14px; font-weight: bold;">Layering Lab</a>
+        <a href="/cart" style="color: #ffc107; text-decoration: none; font-size: 14px; font-weight: bold;">Cart</a>
     </div>
 </nav>
