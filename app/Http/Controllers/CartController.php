@@ -19,27 +19,28 @@ class CartController extends Controller
         return view('cart.index', compact('cart', 'total'));
     }
 
-    public function add(Request $request, $id)
-    {
-        $product = Product::findOrFail($id);
-        $cart = session()->get('cart', []);
+   public function add(Request $request, $id)
+{
+    $product = Product::findOrFail($id);
+    $cart = session()->get('cart', []);
 
-        // If item already exists in cart, increment quantity
-        if(isset($cart[$id])) {
-            $cart[$id]['quantity']++;
-        } else {
-            $cart[$id] = [
-                "name" => $product->name,
-                "price" => $product->price,
-                "quantity" => 1,
-                "gender_category" => $product->gender_category
-            ];
-        }
-
-        session()->put('cart', $cart);
-        return redirect()->route('cart.index')->with('success', 'Perfume added to cart successfully!');
+    // If item already exists in cart, increment quantity
+    if(isset($cart[$id])) {
+        $cart[$id]['quantity']++;
+    } else {
+        $cart[$id] = [
+            "name" => $product->name,
+            "price" => $product->price,
+            "quantity" => 1,
+            "gender_category" => $product->gender_category
+        ];
     }
 
+    session()->put('cart', $cart);
+    session()->save(); // Ensures session data writes immediately
+
+    return redirect()->route('cart.index')->with('success', 'Successfully added ' . $product->name . ' to your cart!');
+}
     public function remove($id)
     {
         $cart = session()->get('cart');
@@ -58,4 +59,5 @@ class CartController extends Controller
         session()->forget('cart');
         return view('cart.success');
     }
+    
 }
