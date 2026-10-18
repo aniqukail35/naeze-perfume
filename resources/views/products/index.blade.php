@@ -6,7 +6,7 @@
     <title>Naeze Perfumes - Storefront</title>
 </head>
 <body style="font-family: Arial, sans-serif; padding: 40px; text-align: center; background-color: #f9f9f9;">
-    
+    @include('partials.navbar')
     <h1>Welcome to Naeze Perfumes</h1>
     <p>Discover your signature scent with our curated collection.</p>
 

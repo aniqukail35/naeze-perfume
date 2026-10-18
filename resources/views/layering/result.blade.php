@@ -6,7 +6,7 @@
     <title>Your Custom Blend & Pairings - Naeze Perfumes</title>
 </head>
 <body style="font-family: Arial, sans-serif; padding: 40px; background-color: #f9f9f9; color: #333; text-align: center;">
-    
+    @include('partials.navbar')
     <div style="max-width: 600px; margin: 0 auto; background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
         <p style="text-transform: uppercase; letter-spacing: 2px; font-size: 12px; color: #888; margin-bottom: 5px;">Layering Lab Results</p>
         <h1 style="color: #111; margin-top: 0;">{{ $blendName }}</h1>

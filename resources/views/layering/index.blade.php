@@ -6,7 +6,7 @@
     <title>Layering Lab - Naeze Perfumes</title>
 </head>
 <body style="font-family: Arial, sans-serif; padding: 40px; background-color: #f9f9f9; color: #333;">
-    
+    @include('partials.navbar')
     <div style="max-width: 600px; margin: 0 auto; background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
         <h1 style="text-align: center; margin-top: 0; color: #111;">Fragrance Note Layering Lab</h1>
         <p style="text-align: center; color: #666; font-size: 14px; margin-bottom: 30px;">Design your own custom bespoke perfume by selecting your ideal Top, Heart, and Base notes.</p>
