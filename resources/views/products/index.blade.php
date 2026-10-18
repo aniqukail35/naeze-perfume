@@ -16,7 +16,10 @@
     <div style="display: flex; justify-content: center; gap: 20px; margin-top: 30px; flex-wrap: wrap;">
         @forelse($products as $product)
             <div style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; width: 250px; text-align: left; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-                <h3 style="margin-top: 0; color: #333;">{{ $product->name }}</h3>
+                <!-- Clickable Product Title -->
+                <h3 style="margin-top: 0;">
+                    <a href="{{ route('products.show', $product->id) }}" style="color: #333; text-decoration: none;">{{ $product->name }}</a>
+                </h3>
                 <p style="color: #666; font-size: 14px; min-height: 40px;">{{ $product->description }}</p>
                 <p style="font-weight: bold; color: #b22222; font-size: 16px;">RM {{ number_format($product->price, 2) }}</p>
                 <span style="background: #eee; padding: 4px 8px; font-size: 12px; border-radius: 4px; color: #555;">{{ $product->gender_category }}</span>

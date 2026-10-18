@@ -8,6 +8,7 @@ use App\Http\Controllers\LayeringLabController;
 Route::get('/quiz', [QuizController::class, 'showQuiz']);
 Route::post('/quiz/submit', [QuizController::class, 'calculateRecommendation'])->name('quiz.submit');
 Route::get('/', [ProductController::class, 'index']);
+Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/layering-lab', [LayeringLabController::class, 'index']);
 Route::post('/layering-lab/blend', [LayeringLabController::class, 'blend'])->name('layering.blend');
 Route::get('/quiz', [QuizController::class, 'index']);
