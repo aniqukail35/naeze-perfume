@@ -39,8 +39,7 @@ class CartController extends Controller
         session()->put('cart', $cart);
         session()->save(); // Ensures session data writes immediately
 
-        // Stay on the same page and pass success message
-        return redirect()->back()->with('success', 'Successfully added ' . $product->name . ' to your cart!');
+        return redirect()->back();
     }
 
     public function remove($id)
@@ -53,11 +52,16 @@ class CartController extends Controller
             session()->save();
         }
 
-        return redirect()->route('cart.index')->with('success', 'Item removed from cart.');
+        return redirect()->route('cart.index');
     }
 
     public function checkout()
     {
+        // Require user login before placing an order
+        if (!auth()->check()) {
+            return redirect()->route('login')->with('error', 'Please login to complete your purchase.');
+        }
+
         // Clear the session cart upon successful checkout
         session()->forget('cart');
         return view('cart.success');
